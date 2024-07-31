@@ -1,8 +1,14 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const Weather = () => {
+  const { data: session } = useSession();
+  const router = useRouter();
+  if (!session?.user) return router.replace("/auth");
   return (
     <div className="items-center">
       <Input

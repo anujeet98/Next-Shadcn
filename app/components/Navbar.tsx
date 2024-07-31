@@ -1,15 +1,18 @@
 "use client";
 import React from "react";
 import { ModeToggle } from "./ModeToggle";
-import { redirect, useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
 
 const Navbar = () => {
   const { data: session } = useSession();
-  console.log(session, session?.user);
-  //   if (!session?.user) redirect("/auth");
   const router = useRouter();
-  const handleAuth = () => {
+  const handleAuth = async () => {
+    if (session?.user) {
+      await signOut();
+      router.refresh();
+      return;
+    }
     router.push("/auth");
   };
   return (

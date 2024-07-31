@@ -18,7 +18,6 @@ function ClientLayout(props: {
         disableTransitionOnChange>
         <Navbar />
         {props.children}
-        <Toaster />
       </ThemeProvider>
     </SessionProvider>
   );

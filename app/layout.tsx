@@ -62,6 +62,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ClientLayout session={session}>{children}</ClientLayout>
+        <Toaster />
       </body>
     </html>
   );

@@ -7,47 +7,18 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Mail } from "lucide-react";
 
 import React from "react";
 import { auth, signIn } from "@/auth";
-import { connectToDB } from "@/lib/dbConnect";
-import { User } from "@/models/userModel";
-import { hash } from "bcryptjs";
 import { redirect } from "next/navigation";
 import LoginForm from "@/components/client/LoginForm";
-import { toast } from "sonner";
+import SignUpForm from "@/components/client/SignUpForm";
 
 async function page() {
   const session = await auth();
 
   if (session?.user) redirect("/weather");
-  const signupHandler = async (formData: FormData) => {
-    "use server";
-
-    const email = formData.get("email") as string | undefined;
-    const password = formData.get("password") as string | undefined;
-
-    if (!email && !password) {
-      toast.error("Invalid credentials provided");
-    }
-
-    await connectToDB();
-
-    const user = await User.findOne({ email });
-    if (user) toast.error("user already exists");
-
-    const hashedPassword = await hash(password as string, 10);
-
-    await User.create({
-      email,
-      password: hashedPassword,
-    });
-
-    redirect("/auth");
-  };
 
   return (
     <div className="flex justify-center items-center h-dvh">
@@ -93,16 +64,7 @@ async function page() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form action={signupHandler} className="flex flex-col gap-4">
-                <Input type="email" placeholder="email" name="email"></Input>
-                <Input
-                  type="password"
-                  placeholder="password"
-                  name="password"></Input>
-                <Button type="submit" className="mx-auto">
-                  <Mail className="mr-2 h-4 w-4" /> SignUp with Email
-                </Button>
-              </form>
+              <SignUpForm />
             </CardContent>
             <CardFooter className="flex flex-col gap-4">
               <span>or</span>

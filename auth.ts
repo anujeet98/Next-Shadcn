@@ -1,7 +1,7 @@
 import NextAuth, { AuthError, CredentialsSignin } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialProvider from "next-auth/providers/credentials";
-import { user, User } from "./models/userModel";
+import { IUser, User, IUserWithId } from "./models/userModel";
 import {compare} from "bcryptjs";
 import { connectToDB } from "./lib/dbConnect";
  
@@ -33,22 +33,19 @@ export const authOptions = {
           }
   
           await connectToDB();
-  
-          const user = await User.findOne({email}).select("+password") as user;
+          const user = await User.findOne({email}).select("+password") as IUserWithId;
           if(!user)
-            throw new CredentialsSignin({cause: "Invalid Email/Password"});
+            throw new CredentialsSignin({cause: "Invalid email provided"});
   
           if(!user.password)
-            throw new CredentialsSignin({cause: "Invalid credentials provided"});
-  
+            throw new CredentialsSignin({cause: "Invalid credential provided"});
+          
           const passMatch = await compare(password, user.password);
-  
           if(!passMatch) {
             throw new CredentialsSignin({
               cause: "Password is not valid",
             });
           }
-          console.log('))))))))))))))))))')
           return { name: user.name, email: user.email, id: user._id };
         }
       })
@@ -58,18 +55,15 @@ export const authOptions = {
     },
     callbacks: {
       signIn: async ({user, account}: {user: any, account: any}) => {
-        if(account?.providergoogle){
+        if(account?.provider === 'google'){
           try{
             const {email, name, id, image} = user;
-  
             await connectToDB();
-  
             const userExists = await User.findOne({email});
             if(!userExists){
               await User.create({email, googleId: id});
-              throw new Error("EmailExist");
             }
-  
+            
             return true;
           }
           catch(err){
