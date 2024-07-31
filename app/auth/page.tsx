@@ -18,11 +18,12 @@ import { User } from "@/models/userModel";
 import { hash } from "bcryptjs";
 import { redirect } from "next/navigation";
 import LoginForm from "@/components/client/LoginForm";
+import { toast } from "sonner";
 
 async function page() {
   const session = await auth();
 
-  if (session?.user) redirect("/users");
+  if (session?.user) redirect("/weather");
   const signupHandler = async (formData: FormData) => {
     "use server";
 
@@ -30,13 +31,13 @@ async function page() {
     const password = formData.get("password") as string | undefined;
 
     if (!email && !password) {
-      throw new Error("Invalid credentials provided");
+      toast.error("Invalid credentials provided");
     }
 
     await connectToDB();
 
     const user = await User.findOne({ email });
-    if (user) throw new Error("user already exists");
+    if (user) toast.error("user already exists");
 
     const hashedPassword = await hash(password as string, 10);
 

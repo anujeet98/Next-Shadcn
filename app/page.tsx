@@ -1,13 +1,11 @@
-import Link from "next/link";
-import ProductCart from "./components/ProductCart";
+import Banner from "./components/Banner";
 
 export default function Home() {
   return (
     <main>
-      <h1>Hello World</h1>
-      <Link href="/users">users</Link>
-      <br></br>
-      <ProductCart />
+      <div>
+        <Banner />
+      </div>
     </main>
   );
 }

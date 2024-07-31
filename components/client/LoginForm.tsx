@@ -14,7 +14,7 @@ const LoginForm = () => {
       action={async (formData) => {
         const email = formData.get("email") as string | undefined;
         const password = formData.get("password") as string | undefined;
-
+        console.log("hehe", email, password);
         if (!email && !password) {
           return toast.error("Invalid credentials provided");
         }
