@@ -3,7 +3,7 @@ import GoogleProvider from "next-auth/providers/google";
 import CredentialProvider from "next-auth/providers/credentials";
 import { user, User } from "./models/userModel";
 import {compare} from "bcryptjs";
-import { connectToDB } from "./lib/utils";
+import { connectToDB } from "./lib/dbConnect";
 import { toast } from "sonner";
  
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -34,7 +34,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         await connectToDB();
 
-        const user = await User.findOne({email}).select("+password");
+        const user = await User.findOne({email}).select("+password") as user;
         if(!user)
           throw new CredentialsSignin({cause: "Invalid Email/Password"});
 
@@ -49,7 +49,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           });
         }
 
-        return { name: user.name, email: 'test@gmail.com', id: user._id };
+        return { name: user.name, email: user.email, id: user._id };
 
       }
     })

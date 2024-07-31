@@ -13,12 +13,10 @@ import { Mail } from "lucide-react";
 
 import React from "react";
 import { auth, signIn } from "@/auth";
-import { CredentialsSignin } from "next-auth";
-import { connectToDB } from "@/lib/utils";
+import { connectToDB } from "@/lib/dbConnect";
 import { User } from "@/models/userModel";
 import { hash } from "bcryptjs";
 import { redirect } from "next/navigation";
-import { toast } from "@/components/ui/use-toast";
 import LoginForm from "@/components/client/LoginForm";
 
 async function page() {

@@ -1,10 +1,11 @@
-import { model, models, Schema } from "mongoose";
+import { Model, model, models, Schema } from "mongoose";
 
 export type user = {
-    email: String,
-    name: String,
-    password: String,
-    googleId: String,
+    _id: string,
+    email: string,
+    name: string,
+    password: string,
+    googleId: string,
 }
 
 const userSchema = new Schema({
@@ -25,4 +26,4 @@ const userSchema = new Schema({
     }
 });
 
-export const User = models?.User || model("User", userSchema);
+export const User: Model<user> = models?.User || model("User", userSchema);
