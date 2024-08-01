@@ -3,6 +3,7 @@ import React from "react";
 import { ModeToggle } from "./ModeToggle";
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 
 const Navbar = () => {
   const { data: session } = useSession();
@@ -21,16 +22,16 @@ const Navbar = () => {
         <div className="text-white text-xl font-bold">Weather App</div>
         <div className="space-x-4 flex items-center">
           <ModeToggle />
-          <a href="/" className="text-gray-300 hover:text-white">
+          <Link href="/" className="text-gray-300 hover:text-white">
             Home
-          </a>
-          <a href="about" className="text-gray-300 hover:text-white">
+          </Link>
+          <Link href="about" className="text-gray-300 hover:text-white">
             About
-          </a>
+          </Link>
           {session?.user ? (
-            <a href="weather" className="text-gray-300 hover:text-white">
+            <Link href="weather" className="text-gray-300 hover:text-white">
               weather
-            </a>
+            </Link>
           ) : (
             ""
           )}
