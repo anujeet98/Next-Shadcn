@@ -33,7 +33,7 @@ function WeatherDashboard(props: { data: any }) {
         <Card className="h-20">
           <CardDescription className="flex justify-between px-4 py-4">
             <span>
-              <img src="" alt="sunset" />
+              <img src="/sunset.png" alt="sunset" className="h-12 w-12" />
             </span>
             <span className="flex flex-col">
               <span className="text-1xl">Sunset</span>
@@ -44,7 +44,7 @@ function WeatherDashboard(props: { data: any }) {
         <Card className="h-20">
           <CardDescription className="flex justify-between px-4 py-4">
             <span>
-              <img src="" alt="sunrise" />
+              <img src="/sunrise.png" alt="sunrise" className="h-12 w-12" />
             </span>
             <span className="flex flex-col">
               <span className="text-1xl">Sunrise</span>
@@ -57,7 +57,7 @@ function WeatherDashboard(props: { data: any }) {
         <Card className="h-20">
           <CardDescription className="flex justify-between px-4 py-4">
             <span>
-              <img src="" alt="wind" />
+              <img src="wind.png" alt="wind" className="h-12 w-12" />
             </span>
             <span className="flex flex-col">
               <span className="text-1xl">Wind</span>
@@ -68,7 +68,7 @@ function WeatherDashboard(props: { data: any }) {
         <Card className="h-20">
           <CardDescription className="flex justify-between px-4 py-4">
             <span>
-              <img src="" alt="humidity" />
+              <img src="humidity.png" alt="humidity" className="h-12 w-12" />
             </span>
             <span className="flex flex-col">
               <span className="text-1xl">Humidity</span>
@@ -81,7 +81,7 @@ function WeatherDashboard(props: { data: any }) {
         <Card className="h-20">
           <CardDescription className="flex justify-between px-4 py-4">
             <span>
-              <img src="" alt="feelsLike" />
+              <img src="feel.png" alt="feelsLike" className="h-12 w-12" />
             </span>
             <span className="flex flex-col">
               <span className="text-1xl">Feels Like</span>
@@ -92,7 +92,7 @@ function WeatherDashboard(props: { data: any }) {
         <Card className="h-20">
           <CardDescription className="flex justify-between px-4 py-4">
             <span>
-              <img src="" alt="visibility" />
+              <img src="visib.png" alt="visibility" className="h-12 w-12" />
             </span>
             <span className="flex flex-col">
               <span className="text-1xl">Visibility</span>
