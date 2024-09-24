@@ -1,8 +1,11 @@
 import React from 'react'
+import { Button } from '../ui/button'
 
 function Weather() {
     return (
-        <div>Weather</div>
+        <div>
+            <Button>Fetch Weather</Button>
+        </div>
     )
 }
 
